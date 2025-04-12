@@ -18,7 +18,6 @@ class UserManagement:
 
             # Check if the email or username already exists for this organization
             existing_user = session.query(User).filter_by(
-                org_id=user_data.get('org_id'),
                 email=user_data.get('email')
             ).first()
 
@@ -26,7 +25,6 @@ class UserManagement:
                 return {"status": False, "message": "Email already exists in this organisation"}
 
             existing_user_name = session.query(User).filter_by(
-                org_id=user_data.get('org_id'),
                 user_name=user_data.get('user_name')
             ).first()
 
