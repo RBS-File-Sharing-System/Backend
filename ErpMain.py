@@ -21,17 +21,16 @@ def create_organisation():
 
     org_data = data.get('org_data')
     user_data = data.get('user_data')
+    username = user_data.get('user_name')
 
-    username = request.headers.get("X-User", "system")
     result = org_service.create_org(org_data, user_data, username)
     return jsonify(result)
 
 
 @app.route('/login', methods=['POST'])
 def login():
-    data = request.json
-    username = data.get('username')
-    password = data.get('password')
+    username = request.authorization.get('username')
+    password = request.authorization.get('password')
 
     if not username or not password:
         return jsonify({"status": False, "message": "Username and Password are required"}), 400

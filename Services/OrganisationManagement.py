@@ -1,7 +1,7 @@
 import traceback
 from DatabaseModels import DBConnections
 from DatabaseModels.Organisations import Organisation
-from UserManagement import UserManagement
+from Services.UserManagement import UserManagement
 
 
 class OrganisationManagement:
@@ -49,7 +49,7 @@ class OrganisationManagement:
                 return {
                     "status": True,
                     "message": "Organisation created successfully",
-                    "org_id": org.org_id
+                    "org_id": org_id
                 }
 
         except Exception as er:

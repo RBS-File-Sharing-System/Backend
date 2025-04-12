@@ -1,9 +1,8 @@
 import traceback
+import bcrypt  # ✅ Use bcrypt for checking
 from sqlalchemy.sql import func
-from werkzeug.security import check_password_hash
 from DatabaseModels.Users import User
 from DatabaseModels import DBConnections
-
 
 class LoginManagement:
     def __init__(self):
@@ -12,7 +11,6 @@ class LoginManagement:
     def login_user(self, username: str, password: str) -> dict:
         try:
             with self.db.get_session() as session:
-
                 # Get user by username only (not checking org_id)
                 user = session.query(User).filter_by(user_name=username).first()
 
@@ -22,8 +20,8 @@ class LoginManagement:
                 if not user.is_active:
                     return {"status": False, "message": "User account is inactive"}
 
-                # Check password (assuming stored as hashed)
-                if not check_password_hash(user.password, password):
+                # ✅ Check password using bcrypt
+                if not bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
                     return {"status": False, "message": "Incorrect password"}
 
                 # Update last login timestamp

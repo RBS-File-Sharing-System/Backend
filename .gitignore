@@ -3,6 +3,7 @@
 
 # Ignore Python bytecode cache
 DatabaseModels/__pycache__/
+Services/__pycache__/
 
 # Ignore sensitive configuration
 properties.ini

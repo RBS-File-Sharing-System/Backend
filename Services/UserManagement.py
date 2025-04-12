@@ -1,7 +1,8 @@
 from sqlalchemy.exc import SQLAlchemyError
 from DatabaseModels import DBConnections
 from DatabaseModels.Users import User
-from sqlalchemy import func
+import bcrypt
+
 
 class UserManagement:
     def __init__(self):
@@ -31,11 +32,14 @@ class UserManagement:
             if existing_user_name:
                 return {"status": False, "message": "Username already exists in this organisation"}
 
+            raw_password = user_data.get('password')
+            hashed_password = bcrypt.hashpw(raw_password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+
             # Create the new user
             new_user = User(
                 user_name=user_data.get('user_name'),
                 email=user_data.get('email'),
-                password=user_data.get('password'),  # Hash in real app!
+                password=hashed_password,  # Hash in real app!
                 org_id=user_data.get('org_id'),
                 age=user_data.get('age'),
                 address=user_data.get('address'),
@@ -47,14 +51,14 @@ class UserManagement:
             )
 
             session.add(new_user)
-
+            user_id = new_user.user_id
             if own_session:
                 session.commit()
 
             return {
                 "status": True,
                 "message": "User created successfully",
-                "user_id": new_user.user_id
+                "user_id": user_id
             }
 
         except Exception as err:

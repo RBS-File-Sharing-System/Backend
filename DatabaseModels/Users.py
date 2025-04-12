@@ -24,7 +24,7 @@ class User(Base):
     last_login = Column(DateTime, nullable=True)  # The last time the user logged in
 
     # Relationship with Organisation
-    organisation = relationship("Organisation", backref="users")
+    organisation = relationship("Organisation", backref="org_users")
 
     # Default columns
     created_at = Column(DateTime, default=func.now(), nullable=False)
@@ -36,7 +36,3 @@ class User(Base):
     created_by_program_name = Column(String, nullable=False)
     updated_by_program_name = Column(String, nullable=False)
 
-
-# Create the table in the database
-# Base.metadata.drop_all(engine)
-Base.metadata.create_all(engine)

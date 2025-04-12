@@ -5,7 +5,7 @@ from DatabaseModels.Organisations import Organisation
 from DatabaseModels.Users import User
 
 # Drop all tables (if they exist)
-# Base.metadata.drop_all(engine)
+Base.metadata.drop_all(engine)
 
 # Create all tables
 Base.metadata.create_all(engine)
