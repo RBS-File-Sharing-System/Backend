@@ -12,6 +12,6 @@ def create_organisation():
     org_data = data.get('org_data')
     user_data = data.get('user_data')
     username = user_data.get('user_name')
-
     result = org_service.create_org(org_data, user_data, username)
+    print(result)
     return jsonify(result)
