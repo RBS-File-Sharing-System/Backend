@@ -21,6 +21,7 @@ class User(Base):
 
     # Active status
     is_active = Column(Boolean, default=True)  # Indicating whether the user is active or not
+    is_admin = Column(Boolean, default=True)
     last_login = Column(DateTime, nullable=True)  # The last time the user logged in
 
     # Relationship with Organisation

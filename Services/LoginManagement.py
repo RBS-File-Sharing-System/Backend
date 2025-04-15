@@ -4,6 +4,7 @@ from sqlalchemy.sql import func
 from DatabaseModels.Users import User
 from DatabaseModels import DBConnections
 
+
 class LoginManagement:
     def __init__(self):
         self.db = DBConnections
