@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token
 from Services.LoginManagement import LoginManagement
-
+from datetime import timedelta
 login_bp = Blueprint('login_api', __name__)
 
 login_service = LoginManagement()
@@ -21,7 +21,7 @@ def login():
         return jsonify(result), 401  # Return error if login fails
 
     # Generate JWT token upon successful login
-    access_token = create_access_token(identity=username)
+    access_token = create_access_token(identity=username,additional_claims=result,expires_delta=timedelta(minutes=120))
 
     return jsonify({
         "status": True,

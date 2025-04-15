@@ -130,12 +130,14 @@ class UserManagement:
     def get_users_by_org_id(self, org_id: int) -> dict:
         try:
             with self.db.get_session() as session:
+                print("org_id",org_id)
                 users = session.query(User).filter_by(org_id=org_id).all()
 
                 if not users:
                     return {"status": False, "message": "No users found for the given organisation ID"}
 
-                return {"status": True, "users": [user.user_name for user in users]}  # Adjust the data as needed
+                return {"status": True, "users": [{column.name: getattr(user, column.name) for column in User.__table__.columns}
+                    for user in users]}  # Adjust the data as needed
         except SQLAlchemyError as err:
             return {"status": False, "message": str(err)}
 

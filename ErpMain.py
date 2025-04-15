@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 from ApiInterfaces.OrganisationInterface import organisation_bp
+from ApiInterfaces.UserInterface import user_bp
 from ApiInterfaces.LoginInterface import login_bp
 from flask_cors import CORS
 
@@ -17,6 +18,8 @@ jwt = JWTManager(app)
 # Register Blueprints
 app.register_blueprint(organisation_bp, url_prefix='/api/organisation')
 app.register_blueprint(login_bp, url_prefix='/api/login')
+app.register_blueprint(user_bp, url_prefix='/api/users')
+
 
 
 @app.route('/protected', methods=['GET'])
