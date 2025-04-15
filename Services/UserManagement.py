@@ -21,14 +21,14 @@ class UserManagement:
             existing_user = session.query(User).filter_by(
                 email=user_data.get('email')
             ).first()
-
+            print("existing_userexisting_user",existing_user)
             if existing_user:
                 return {"status": False, "message": "Email already exists in this organisation"}
 
             existing_user_name = session.query(User).filter_by(
                 user_name=user_data.get('user_name')
             ).first()
-
+            print("existing_user_name",existing_user_name)
             if existing_user_name:
                 return {"status": False, "message": "Username already exists in this organisation"}
 

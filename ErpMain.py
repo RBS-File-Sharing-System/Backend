@@ -2,11 +2,14 @@ from flask import Flask, jsonify
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 from ApiInterfaces.OrganisationInterface import organisation_bp
 from ApiInterfaces.LoginInterface import login_bp
+from flask_cors import CORS
 
 # Flask app and configuration
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'  # Change to a real secret key
 app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'  # Change to a real secret key
+CORS(app)
+
 
 # Initialize JWT
 jwt = JWTManager(app)

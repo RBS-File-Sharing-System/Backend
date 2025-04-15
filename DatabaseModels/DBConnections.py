@@ -2,7 +2,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session, declarative_base
 
 # Format: postgresql+psycopg2://username:password@host:port/database
-DATABASE_URL = "postgresql+psycopg2://postgres:admin@localhost:5432/erp"
+# DATABASE_URL = "postgresql+psycopg2://postgres:admin@localhost:5432/erp"
+DATABASE_URL = "postgresql+psycopg2://postgres:admin@localhost:5433/erp"
 
 engine = create_engine(
     DATABASE_URL,
